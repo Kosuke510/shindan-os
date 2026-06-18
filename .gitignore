@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# local
+.DS_Store
+*.pem
+.env*
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Private learning materials
+# Keep instructions/examples, but never commit local question bodies or generated catalogs.
+/src/data/questions/private/*
+!/src/data/questions/private/README.md
+!/src/data/questions/private/*.example.json
+/src/data/questions/private.generated.ts

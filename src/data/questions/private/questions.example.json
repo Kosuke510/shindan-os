@@ -1,0 +1,23 @@
+[
+  {
+    "id": "private-example-001",
+    "subject": "economics",
+    "coreName": "入力例",
+    "field": "入力例",
+    "topic": "出典メタデータ",
+    "rank": "C",
+    "difficulty": "基礎",
+    "type": "一問一答",
+    "question": "ここに個人学習用の問題文を入力します。",
+    "answer": "ここに解答を入力します。",
+    "explanation": "ここに解説を入力します。",
+    "commonMistake": "ここによくある誤りを入力します。",
+    "examPoint": "ここに試験上のポイントを入力します。",
+    "relatedTopics": ["入力例"],
+    "source": "手入力",
+    "sourceYear": "2026",
+    "sourceSubject": "経済学・経済政策",
+    "sourceQuestionNumber": "例題1",
+    "sourceNote": "このファイル自体はアプリへ取り込まれません。"
+  }
+]

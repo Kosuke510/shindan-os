@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Shindan OS">
+  <rect width="512" height="512" fill="#17213a"/>
+  <path d="M155 160c0-25 20-45 45-45h151v64H219v43h99c25 0 45 20 45 45v80c0 25-20 45-45 45H157v-64h142v-43h-99c-25 0-45-20-45-45v-80Z" fill="#ffffff"/>
+  <rect x="299" y="115" width="64" height="64" rx="19" fill="#4f7cff"/>
+</svg>
