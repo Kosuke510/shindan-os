@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { ArrowRight, CheckCircle2, Clock3, Shuffle, Sparkles } from "lucide-react";
 import { AppViewHeader } from "@/components/AppViewHeader";
+import { AbcTopicMap } from "@/components/AbcTopicMap";
 import { SubjectCards } from "@/components/SubjectCards";
 import { questions } from "@/data/questionCatalog";
 import type { LearningState, StudySessionConfig } from "@/types";
@@ -20,13 +21,14 @@ export function PracticeView({ state, onStart }: { state: LearningState; onStart
           <p className="mt-2 text-sm leading-6 text-slate-300">期限到来の問題を優先しつつ、短時間でも学習を止めない構成です。</p>
           <div className="mt-5 grid gap-2.5 sm:grid-cols-3">
             <ActionButton icon={Clock3} label="10分だけやる" note="復習・Weak優先の5問" primary onClick={() => onStart({ mode: "quick" })} />
-            <ActionButton icon={ArrowRight} label={dueCount ? "復習タスクから" : "Aランク問題を1問"} note={dueCount ? `${dueCount}問が期限到来` : "新規問題を1問出題"} onClick={() => onStart({ mode: "review" })} />
+            <ActionButton icon={ArrowRight} label={dueCount ? "復習タスクから" : "A論点問題を1問"} note={dueCount ? `${dueCount}問が期限到来` : "新規問題を1問出題"} onClick={() => onStart({ mode: "review" })} />
             <ActionButton icon={Shuffle} label="ランダムで1問" note={`${questions.length}問から出題`} onClick={() => onStart({ mode: "random" })} />
           </div>
         </section>
 
-        {dueCount === 0 && <div className="mt-4 flex items-start gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4"><CheckCircle2 size={19} className="mt-0.5 shrink-0 text-emerald-600" /><div><p className="text-sm font-black text-emerald-800">今日の復習タスクはありません</p><p className="mt-1 text-xs leading-5 text-emerald-700">Aランクの新規問題に進みましょう。</p></div></div>}
+        {dueCount === 0 && <div className="mt-4 flex items-start gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4"><CheckCircle2 size={19} className="mt-0.5 shrink-0 text-emerald-600" /><div><p className="text-sm font-black text-emerald-800">今日の復習タスクはありません</p><p className="mt-1 text-xs leading-5 text-emerald-700">A論点の新規問題に進みましょう。</p></div></div>}
         <div className="mt-8"><SubjectCards stats={stats} progress={state.questionProgress} onSelect={(subject) => onStart({ mode: "subject", subject })} /></div>
+        <AbcTopicMap onStart={onStart} />
       </main>
     </div>
   );

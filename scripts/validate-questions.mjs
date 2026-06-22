@@ -24,7 +24,7 @@ const moduleCache = new Map();
 
 function resolveLocalModule(fromPath, specifier) {
   const basePath = resolve(dirname(fromPath), specifier);
-  const candidates = [basePath, `${basePath}.ts`, join(basePath, "index.ts")];
+  const candidates = [basePath, `${basePath}.ts`, `${basePath}.json`, join(basePath, "index.ts")];
   const matched = candidates.find((candidate) => existsSync(candidate));
   if (!matched) throw new Error(`${fromPath} から ${specifier} を解決できません。`);
   return matched;
@@ -32,6 +32,12 @@ function resolveLocalModule(fromPath, specifier) {
 
 function loadTsModule(path) {
   if (moduleCache.has(path)) return moduleCache.get(path).exports;
+  if (path.endsWith(".json")) {
+    const parsed = JSON.parse(readFileSync(path, "utf8"));
+    const jsonExports = { ...parsed, default: parsed };
+    moduleCache.set(path, { exports: jsonExports });
+    return jsonExports;
+  }
   const source = readFileSync(path, "utf8");
   const output = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
@@ -53,7 +59,14 @@ function loadQuestionArray({ path, exportName, label }) {
   return value.map((question) => ({ ...question, __dataset: label }));
 }
 
-const questions = sourceFiles.flatMap(loadQuestionArray);
+const abcModule = loadTsModule(join(projectRoot, "src", "data", "abcTopics.ts"));
+const abcTopics = abcModule.abcTopics;
+const applyAbcMetadata = abcModule.applyAbcMetadata;
+const resolveAbcTopicWithMeta = abcModule.resolveAbcTopicWithMeta;
+const ABC_MIN_CONFIDENCE_SCORE = abcModule.ABC_MIN_CONFIDENCE_SCORE ?? 5;
+const allowedTopicTags = new Set(abcTopics.map((topic) => topic.codexTag));
+const topicSubjectByTag = new Map(abcTopics.map((topic) => [topic.codexTag, topic.subject]));
+const questions = sourceFiles.flatMap(loadQuestionArray).map((question) => ({ ...applyAbcMetadata(question), __dataset: question.__dataset }));
 const { calculateContentReviewDue } = loadTsModule(join(projectRoot, "src", "utils", "contentReview.ts"));
 const errors = [];
 const warnings = [];
@@ -122,6 +135,12 @@ questions.forEach((question, index) => {
   if (!allowedSubjects.has(question.subject)) errors.push(`${label}: subject が不正です。`);
   else subjectCounts[question.subject] += 1;
   if (!allowedRanks.has(question.rank)) errors.push(`${label}: rank は A / B / C のいずれかです。`);
+  if (!allowedRanks.has(question.importance)) errors.push(`${label}: importance は A / B / C のいずれかです。`);
+  if (typeof question.topicTag !== "string" || !allowedTopicTags.has(question.topicTag)) errors.push(`${label}: topicTag がABC重要論点マップに存在しません。`);
+  if (question.primaryExamTopicTag !== question.topicTag) errors.push(`${label}: primaryExamTopicTag と topicTag が一致しません。`);
+  if (topicSubjectByTag.get(question.topicTag) !== question.subject) errors.push(`${label}: topicTag の科目がquestion.subjectと一致しません。`);
+  if (!["past_exam_pattern", "original"].includes(question.sourceType)) errors.push(`${label}: sourceType が不正です。`);
+  if (question.examStage !== "primary") errors.push(`${label}: examStage は primary にしてください。`);
   if (question.__dataset === "public" && question.rank === "C") errors.push(`${label}: 公開の通常問題にRank Cは入れられません。`);
   if (!allowedDifficulties.has(question.difficulty)) errors.push(`${label}: difficulty が不正です。`);
   if (!allowedTypes.has(question.type)) errors.push(`${label}: type が不正です。`);
@@ -200,6 +219,70 @@ const rankARatio = normalQuestions.length ? rankACount / normalQuestions.length 
 if (rankARatio < 0.65 || rankARatio > 0.75) warnings.push(`Rank A比率が${Math.round(rankARatio * 100)}%です。目安は70%です。`);
 
 const typeCounts = Object.fromEntries([...allowedTypes].map((type) => [type, questions.filter((question) => question.type === type).length]));
+const importanceCounts = Object.fromEntries([...allowedRanks].map((importance) => [importance, questions.filter((question) => question.importance === importance).length]));
+const mapImportanceCounts = Object.fromEntries([...allowedRanks].map((importance) => [importance, abcTopics.filter((topic) => topic.importance === importance).length]));
+const mappedTopicCount = new Set(questions.map((question) => question.topicTag)).size;
+
+// 低信頼度マッピング検出（手動タグなしかつスコアが閾値未満）
+const lowConfidenceIds = questions
+  .filter((question) => question.__dataset !== "private")
+  .flatMap((question) => {
+    try {
+      const meta = resolveAbcTopicWithMeta(question);
+      return meta.isLowConfidence ? [question.id] : [];
+    } catch {
+      return [];
+    }
+  });
+if (lowConfidenceIds.length > 0) {
+  warnings.push(`ABCマッピング低信頼度（スコア<${ABC_MIN_CONFIDENCE_SCORE}、手動タグ未設定）: ${lowConfidenceIds.length}件 [${lowConfidenceIds.join(", ")}]`);
+}
+// ── ABC自動テスト 1-6 ────────────────────────────────────────────────────────
+// 1. ABCマップ件数（期待値：135論点 A68/B43/C24）
+const EXPECTED_MAP = { total: 135, A: 68, B: 43, C: 24 };
+if (abcTopics.length !== EXPECTED_MAP.total)
+  errors.push(`ABCマップ総数: ${abcTopics.length}件（期待値${EXPECTED_MAP.total}）`);
+if (mapImportanceCounts.A !== EXPECTED_MAP.A)
+  errors.push(`ABCマップA件数: ${mapImportanceCounts.A}件（期待値${EXPECTED_MAP.A}）`);
+if (mapImportanceCounts.B !== EXPECTED_MAP.B)
+  errors.push(`ABCマップB件数: ${mapImportanceCounts.B}件（期待値${EXPECTED_MAP.B}）`);
+if (mapImportanceCounts.C !== EXPECTED_MAP.C)
+  errors.push(`ABCマップC件数: ${mapImportanceCounts.C}件（期待値${EXPECTED_MAP.C}）`);
+
+// 2. タグ一意性（codexTagの重複なし）
+const tagsSeen = new Set();
+const dupTags = [];
+for (const topic of abcTopics) {
+  if (tagsSeen.has(topic.codexTag)) dupTags.push(topic.codexTag);
+  tagsSeen.add(topic.codexTag);
+}
+if (dupTags.length > 0) errors.push(`ABCマップにcodexTagの重複: ${dupTags.join(", ")}`);
+
+// 3. マッピング整合性 — 全問題のtopicTagが科目内タグと一致するかは上記forループで確認済み
+
+// 4. 重要度フィルター（A論点に問題がない論点をエラーにする）
+const aTagsWithQuestions = new Set(questions.filter((q) => q.importance === "A").map((q) => q.topicTag));
+const aTagsAll = new Set(abcTopics.filter((t) => t.importance === "A").map((t) => t.codexTag));
+const uncoveredA = [...aTagsAll].filter((tag) => !aTagsWithQuestions.has(tag));
+if (uncoveredA.length > 0)
+  errors.push(`A論点に問題のない論点(${uncoveredA.length}件): ${uncoveredA.join(", ")}`);
+
+// 5. 問題比率（公開問題のimportance A比率が60%以上）
+const pubQ = questions.filter((q) => q.__dataset !== "private");
+const pubAB = pubQ.filter((q) => q.importance === "A" || q.importance === "B").length;
+const pubACount = pubQ.filter((q) => q.importance === "A").length;
+const pubARatio = pubAB > 0 ? pubACount / pubAB : 0;
+if (pubARatio < 0.60) warnings.push(`公開問題のimportance A比率が${Math.round(pubARatio * 100)}%です（推奨60%以上）。`);
+
+// 6. 同一論点連続回避可能性（最大出現論点が全体の半数以下であること）
+const topicFreq = new Map();
+for (const q of pubQ) topicFreq.set(q.primaryExamTopicTag, (topicFreq.get(q.primaryExamTopicTag) ?? 0) + 1);
+const maxTopicFreq = pubQ.length > 0 ? Math.max(...topicFreq.values()) : 0;
+if (maxTopicFreq > Math.ceil(pubQ.length / 2)) {
+  const heavyTag = [...topicFreq.entries()].find(([, v]) => v === maxTopicFreq)?.[0] ?? "?";
+  errors.push(`同一論点の連続回避が不可能な集中があります（論点 ${heavyTag}: ${maxTopicFreq}問）`);
+}
+
 const sensitiveCount = Object.values(sensitiveBySubject).reduce((sum, count) => sum + count, 0);
 const dueCount = Object.values(dueBySubject).reduce((sum, count) => sum + count, 0);
 const unconfirmedCount = Object.values(unconfirmedBySubject).reduce((sum, count) => sum + count, 0);
@@ -217,6 +300,8 @@ if (errors.length) {
   console.log(`validate:questions OK — ${questions.length} questions`);
   console.log(`Subjects: ${Object.entries(subjectCounts).map(([subject, count]) => `${subject}=${count}`).join(", ")}`);
   console.log(`Ranks: A=${rankACount}, B=${normalQuestions.length - rankACount}, A ratio=${Math.round(rankARatio * 100)}%`);
+  console.log(`ABC topic map: total=${abcTopics.length}, A=${mapImportanceCounts.A}, B=${mapImportanceCounts.B}, C=${mapImportanceCounts.C}, with-questions=${mappedTopicCount}`);
+  console.log(`Question importance: ${Object.entries(importanceCounts).map(([importance, count]) => `${importance}=${count}`).join(", ")}`);
   console.log(`Types: ${Object.entries(typeCounts).map(([type, count]) => `${type}=${count}`).join(", ")}`);
   console.log(`Sources: ${Object.entries(sourceCounts).map(([source, count]) => `${source}=${count}`).join(", ")}`);
   console.log(`Content reviews: sensitive=${sensitiveCount}, unconfirmed=${unconfirmedCount}, evidence=${evidenceCount}, no-evidence=${sensitiveCount - evidenceCount}, due=${dueCount}, high-priority unconfirmed=${highPriorityUnconfirmedCount}`);

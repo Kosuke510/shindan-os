@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FlaskConical, RefreshCw } from "lucide-react";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { Dashboard } from "@/components/Dashboard";
@@ -36,6 +36,40 @@ const shuffle = <T,>(items: T[]): T[] => {
   return result;
 };
 
+const questionImportance = (question: Question) => question.importance ?? question.rank;
+type ImportanceWeights = Record<"A" | "B" | "C", number>;
+const defaultWeights: ImportanceWeights = { A: 0.7, B: 0.25, C: 0.05 };
+
+const weightedOrder = (items: Question[], weight: ImportanceWeights = defaultWeights): Question[] => {
+  return [...items].sort((left, right) => {
+    const leftKey = -Math.log(Math.max(Math.random(), Number.EPSILON)) / Math.max(weight[questionImportance(left)], 0.001);
+    const rightKey = -Math.log(Math.max(Math.random(), Number.EPSILON)) / Math.max(weight[questionImportance(right)], 0.001);
+    return leftKey - rightKey;
+  });
+};
+
+const avoidAdjacentTopics = (items: Question[]): Question[] => {
+  const remaining = [...items];
+  const result: Question[] = [];
+  while (remaining.length) {
+    const previousTag = result.at(-1)?.primaryExamTopicTag;
+    const nextIndex = remaining.findIndex((question) => !previousTag || question.primaryExamTopicTag !== previousTag);
+    result.push(...remaining.splice(nextIndex >= 0 ? nextIndex : 0, 1));
+  }
+  return result;
+};
+
+const pickWeightedQuestion = (items: Question[], previous?: { id?: string; topicTag?: string }, weights: ImportanceWeights = defaultWeights): Question | undefined => {
+  const available = items.filter((question) => question.id !== previous?.id && question.primaryExamTopicTag !== previous?.topicTag);
+  const pool = available.length ? available : items.filter((question) => question.id !== previous?.id);
+  if (!pool.length) return items[0];
+  const totalWeight = weights.A + weights.B + weights.C;
+  const roll = Math.random() * totalWeight;
+  const target = roll < weights.A ? "A" : roll < weights.A + weights.B ? "B" : "C";
+  const bucket = pool.filter((question) => questionImportance(question) === target);
+  return shuffle(bucket.length ? bucket : pool)[0];
+};
+
 export function ShindanApp() {
   const { state, isHydrated, persistenceStatus, recordGrade, markQuestionReviewed, resetLearningData, updateLearningState } = useLearningStore();
   const [session, setSession] = useState<ActiveSession | null>(null);
@@ -43,10 +77,20 @@ export function ShindanApp() {
   const [activeView, setActiveView] = useState<AppView>("home");
   const [qaEnabled, setQaEnabled] = useState(process.env.NODE_ENV !== "production");
   const [qaOpen, setQaOpen] = useState(false);
+  const lastSessionQuestion = useRef<{ id?: string; topicTag?: string }>({});
 
   const weakIds = useMemo(() => new Set(state.weakPoints.map((item) => item.questionId)), [state.weakPoints]);
   const dueCount = useMemo(() => questions.filter((question) => state.questionProgress[question.id] && isReviewDue(state.questionProgress[question.id])).length, [state.questionProgress]);
   const reviewStats = useMemo(() => getContentReviewStats(questions, state.questionReviews), [state.questionReviews]);
+  const adaptiveWeights = useMemo<ImportanceWeights>(() => {
+    const rankAQuestions = questions.filter((question) => questionImportance(question) === "A");
+    const rankAProgress = rankAQuestions.map((question) => state.questionProgress[question.id]).filter(Boolean);
+    const attempts = rankAProgress.reduce((sum, progress) => sum + progress.attempts, 0);
+    const correct = rankAProgress.reduce((sum, progress) => sum + progress.correctCount, 0);
+    const coverage = rankAQuestions.length ? rankAProgress.length / rankAQuestions.length : 0;
+    const accuracy = attempts ? correct / attempts : 0;
+    return coverage >= 0.5 && accuracy >= 0.75 ? defaultWeights : { A: 0.85, B: 0.15, C: 0 };
+  }, [state.questionProgress]);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== "production" || new URLSearchParams(window.location.search).get("debug") !== "1") return;
@@ -76,17 +120,27 @@ export function ShindanApp() {
 
     let queue: Question[];
     if (config.mode === "review") {
-      queue = due.length ? shuffle(due) : shuffle(questions.filter((question) => question.rank === "A")).slice(0, 1);
+      const fallback = pickWeightedQuestion(questions.filter((question) => questionImportance(question) === "A"), lastSessionQuestion.current);
+      queue = due.length ? avoidAdjacentTopics(weightedOrder(due, adaptiveWeights)) : fallback ? [fallback] : [];
+    } else if (config.mode === "importance") {
+      const importance = config.importance ?? "A";
+      const matching = questions.filter((question) => questionImportance(question) === importance
+        && (!config.subject || question.subject === config.subject)
+        && (!config.topicTag || question.primaryExamTopicTag === config.topicTag));
+      queue = avoidAdjacentTopics(shuffle(matching));
     } else if (config.mode === "subject" && config.subject) {
-      queue = shuffle(questions.filter((question) => question.subject === config.subject));
+      queue = avoidAdjacentTopics(weightedOrder(questions.filter((question) => question.subject === config.subject), adaptiveWeights));
     } else if (config.mode === "quick") {
       const priority = [...due, ...questions.filter((question) => weakIds.has(question.id) && !due.some((dueQuestion) => dueQuestion.id === question.id))];
-      const remaining = shuffle(questions.filter((question) => !priority.some((priorityQuestion) => priorityQuestion.id === question.id)));
-      queue = [...priority, ...remaining].slice(0, 5);
+      const remaining = weightedOrder(questions.filter((question) => !priority.some((priorityQuestion) => priorityQuestion.id === question.id)), adaptiveWeights);
+      queue = avoidAdjacentTopics([...priority, ...remaining]).slice(0, 5);
     } else {
-      queue = shuffle(questions).slice(0, 1);
+      const selected = pickWeightedQuestion(questions, lastSessionQuestion.current, adaptiveWeights);
+      queue = selected ? [selected] : [];
     }
 
+    if (!queue.length) return;
+    lastSessionQuestion.current = { id: queue[0].id, topicTag: queue[0].primaryExamTopicTag };
     setSession({ config, queue, index: 0, secondsLeft: config.mode === "quick" ? 600 : undefined });
   };
 
@@ -126,7 +180,7 @@ export function ShindanApp() {
 
   const currentQuestion = session?.queue[session.index];
   const sessionLabel = session
-    ? session.label ?? (session.config.mode === "quick" ? "10分だけやる" : session.config.mode === "review" ? "今日の復習" : session.config.mode === "subject" && session.config.subject ? `${subjectMap[session.config.subject].name} Core` : "全科目ランダム")
+    ? session.label ?? (session.config.mode === "quick" ? "10分だけやる" : session.config.mode === "review" ? "今日の復習" : session.config.mode === "importance" ? `${session.config.importance ?? "A"}論点演習` : session.config.mode === "subject" && session.config.subject ? `${subjectMap[session.config.subject].name} Core` : "全科目ランダム")
     : "";
 
   return (

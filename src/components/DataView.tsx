@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { AlertTriangle, CheckCircle2, Database, Download, FileCheck2, RotateCcw, ShieldCheck, Upload } from "lucide-react";
 import { AppViewHeader } from "@/components/AppViewHeader";
+import { abcTopicCounts } from "@/data/abcTopics";
 import { questions } from "@/data/questionCatalog";
 import { subjects } from "@/data/subjects";
 import type { BackupActivity, LearningState } from "@/types";
@@ -19,7 +20,8 @@ interface DataViewProps {
 
 type OperationMessage = { tone: "success" | "error" | "info"; text: string };
 const subjectRows = subjects.map((subject) => ({ label: `${subject.code} ${subject.shortName}`, count: questions.filter((question) => question.subject === subject.id).length }));
-const rankCounts = ["A", "B", "C"].map((rank) => ({ label: `Rank ${rank}`, count: questions.filter((question) => question.rank === rank).length }));
+const importanceCounts = ["A", "B", "C"].map((importance) => ({ label: `${importance}論点の問題`, count: questions.filter((question) => (question.importance ?? question.rank) === importance).length }));
+const abcMapCounts = ["A", "B", "C"].map((importance) => ({ label: `${importance}論点`, count: abcTopicCounts[importance as "A" | "B" | "C"] }));
 const sourceCounts = ["自作", "過去問", "教材", "手入力"].map((source) => ({ label: source, count: questions.filter((question) => question.source === source).length }));
 
 export function DataView({ state, onImportState, onReset }: DataViewProps) {
@@ -108,7 +110,8 @@ export function DataView({ state, onImportState, onReset }: DataViewProps) {
 
         <section className="mt-5 grid gap-4 md:grid-cols-2">
           <DataList title="科目別問題数" rows={subjectRows} />
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2"><DataList title="Rank別" rows={rankCounts} /><DataList title="source別" rows={sourceCounts} /></div>
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2"><DataList title={`ABC重要論点マップ（全${abcTopicCounts.total}）`} rows={abcMapCounts} unit="論点" /><DataList title="問題のABC重要度" rows={importanceCounts} /></div>
+          <DataList title="source別" rows={sourceCounts} />
         </section>
       </main>
     </div>
@@ -130,4 +133,4 @@ function formatTimestamp(value: string | null): string {
 function BackupValue({ label, value, alert = false }: { label: string; value: string; alert?: boolean }) { return <div className={`min-w-0 rounded-xl px-3 py-3 ${alert ? "bg-red-50" : "bg-slate-50"}`}><p className="text-[9px] font-bold text-slate-400">{label}</p><p className={`mt-1 truncate text-xs font-black ${alert ? "text-red-600" : "text-slate-700"}`}>{value}</p></div>; }
 function DataMetric({ label, value, icon: Icon, tone = "navy" }: { label: string; value: string; icon: typeof Database; tone?: "navy" | "amber" | "orange" | "blue" }) { const color = { navy: "bg-slate-100 text-slate-600", amber: "bg-amber-50 text-amber-700", orange: "bg-orange-50 text-orange-700", blue: "bg-blue-50 text-blue-700" }[tone]; return <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4"><span className={`grid size-9 place-items-center rounded-xl ${color}`}><Icon size={17} /></span><p className="mt-3 truncate text-[10px] font-bold text-slate-400">{label}</p><p className="mt-1 text-xl font-black">{value}</p></div>; }
 function InfoPill({ label, value }: { label: string; value: number }) { return <div className="rounded-lg bg-slate-50 px-2 py-2.5 text-center"><p className="text-[9px] font-bold text-slate-400">{label}</p><p className="mt-0.5 font-black text-slate-700">{value}</p></div>; }
-function DataList({ title, rows }: { title: string; rows: Array<{ label: string; count: number }> }) { return <div className="rounded-2xl border border-slate-200 bg-white p-5"><h2 className="text-sm font-black">{title}</h2><div className="mt-3 divide-y divide-slate-100">{rows.map((row) => <div key={row.label} className="flex items-center justify-between gap-3 py-2.5 text-xs"><span className="min-w-0 truncate font-semibold text-slate-500">{row.label}</span><span className="shrink-0 font-black text-slate-700">{row.count}問</span></div>)}</div></div>; }
+function DataList({ title, rows, unit = "問" }: { title: string; rows: Array<{ label: string; count: number }>; unit?: string }) { return <div className="rounded-2xl border border-slate-200 bg-white p-5"><h2 className="text-sm font-black">{title}</h2><div className="mt-3 divide-y divide-slate-100">{rows.map((row) => <div key={row.label} className="flex items-center justify-between gap-3 py-2.5 text-xs"><span className="min-w-0 truncate font-semibold text-slate-500">{row.label}</span><span className="shrink-0 font-black text-slate-700">{row.count}{unit}</span></div>)}</div></div>; }

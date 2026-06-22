@@ -26,8 +26,9 @@ export function SubjectCards({ stats, progress, onSelect }: SubjectCardsProps) {
         {subjects.map((subject) => {
           const stat = stats[subject.id];
           const subjectQuestions = questionsBySubject[subject.id];
-          const rankA = subjectQuestions.filter((question) => question.rank === "A").length;
-          const rankB = subjectQuestions.filter((question) => question.rank === "B").length;
+          const importanceA = subjectQuestions.filter((question) => (question.importance ?? question.rank) === "A").length;
+          const importanceB = subjectQuestions.filter((question) => (question.importance ?? question.rank) === "B").length;
+          const importanceC = subjectQuestions.filter((question) => (question.importance ?? question.rank) === "C").length;
           const unanswered = subjectQuestions.filter((question) => !progress[question.id]).length;
           const due = subjectQuestions.filter((question) => progress[question.id] && isReviewDue(progress[question.id])).length;
           return (
@@ -45,7 +46,7 @@ export function SubjectCards({ stats, progress, onSelect }: SubjectCardsProps) {
               <p className="mt-0.5 truncate text-[10px] font-semibold text-slate-400">{subject.name}</p>
               <div className="mt-3 grid grid-cols-2 gap-1 text-[10px] font-black">
                 <span className="rounded-md bg-slate-50 px-1.5 py-1 text-slate-500">全{subjectQuestions.length}問</span>
-                <span className="rounded-md bg-blue-50 px-1.5 py-1 text-blue-600">A {rankA} / B {rankB}</span>
+                <span className="rounded-md bg-blue-50 px-1.5 py-1 text-blue-600">A {importanceA} · B {importanceB} · C {importanceC}</span>
                 <span className="rounded-md bg-slate-50 px-1.5 py-1 text-slate-500">未回答 {unanswered}</span>
                 <span className={`rounded-md px-1.5 py-1 ${due ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-600"}`}>復習 {due}</span>
               </div>

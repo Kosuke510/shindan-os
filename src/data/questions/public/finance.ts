@@ -17,6 +17,7 @@ const expansion = buildPublicQuestions("finance", "財務・会計", [
   { id: "fa-018", core: "資本コスト", field: "ファイナンス", topic: "WACC", rank: "B", difficulty: "応用", type: "計算", question: "有利子負債40%、自己資本60%、税引後負債コスト3%、自己資本コスト8%のとき、WACCはいくつか。", answer: "6%", explanation: "WACC=0.4×3%+0.6×8%=1.2%+4.8%=6%。", mistake: "資本構成を無視して単純平均の5.5%とする。", point: "各資金の時価ウェイトと税引後コストを使う。", related: ["資本構成", "法人税効果"] },
   { id: "fa-019", core: "証券評価", field: "ファイナンス", topic: "CAPM", rank: "B", difficulty: "応用", type: "計算", question: "安全利子率1%、市場リスクプレミアム5%、ベータ1.2の株式の期待収益率はいくつか。", answer: "7%", explanation: "CAPMより1%+1.2×5%=7%。", mistake: "ベータを安全利子率にも掛ける。", point: "安全利子率+β×市場リスクプレミアムの形を守る。", related: ["ベータ", "分散投資"] },
   { id: "fa-020", core: "株価指標", field: "ファイナンス", topic: "PERとPBR", rank: "B", difficulty: "標準", type: "比較", question: "PERとPBRの違いを説明せよ。", answer: "PERは株価を1株当たり利益で、PBRは株価を1株当たり純資産で割る", explanation: "PERは利益に対する株価水準、PBRは簿価純資産に対する株価水準を示す。", mistake: "PERの分母を1株当たり純資産とする。", point: "EはEarnings、BはBook valueと対応づける。", related: ["EPS", "BPS"] },
+  { id: "fa-021", core: "意思決定会計", field: "管理会計", topic: "埋没原価と差額原価", rank: "A", difficulty: "標準", type: "一問一答", question: "意思決定会計において、過去にすでに生じ今後の意思決定では変えられない原価を何というか。", answer: "埋没原価（サンクコスト）", explanation: "埋没原価は将来の差額原価に含まれないため、自製か外注かなどの意思決定では無視する。", mistake: "過去の投資額が大きいほど継続を優先すべき理由とする。", point: "意思決定に関係するのは将来の差額原価と機会原価のみ。", related: ["差額原価", "機会原価"] },
 ]);
 
 export const financeQuestions = [...legacyQuestions.filter((question) => question.subject === "finance"), ...expansion];

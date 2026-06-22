@@ -104,6 +104,9 @@ export const runQAValidation = (questions: Question[]): QAValidationResult => {
     if (!question.question.trim() || !question.answer.trim() || !question.explanation.trim()) errors.push(`必須本文不足: ${question.id}`);
     if (question.type === "4択" && question.choices?.length !== 4) errors.push(`4択の選択肢不足: ${question.id}`);
     if (question.relatedTopics.length < 1 || question.relatedTopics.length > 3) errors.push(`関連論点数が不正: ${question.id}`);
+    if (!question.importance || !["A", "B", "C"].includes(question.importance)) errors.push(`ABC重要度不足: ${question.id}`);
+    if (!question.topicTag || question.primaryExamTopicTag !== question.topicTag) errors.push(`ABC論点タグ不足: ${question.id}`);
+    if (question.examStage !== "primary") errors.push(`試験区分不足: ${question.id}`);
     if (question.isYearSensitive && !question.reviewPriority) errors.push(`レビュー優先度不足: ${question.id}`);
     if (question.isYearSensitive && (!question.confirmedYear || question.confirmedYear === "未確認" || !question.reviewEvidence)) warnings.push(`未確認: ${question.id}`);
   });

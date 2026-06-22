@@ -25,9 +25,8 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Private learning materials
-# Keep instructions/examples, but never commit local question bodies or generated catalogs.
-/src/data/questions/private/*
-!/src/data/questions/private/README.md
-!/src/data/questions/private/*.example.json
+# Local generated verification output
+/work/abc-current/
+
+# private.generated.ts はビルド時に自動生成されるため除外
 /src/data/questions/private.generated.ts

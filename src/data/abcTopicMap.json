@@ -1,0 +1,1055 @@
+{
+  "title": "中小企業診断士 一次試験 7科目 ABC重要論点マップ",
+  "created_at": "2026-06-18",
+  "classification_policy": {
+    "A": "過去問で高頻度・安定出題。最優先で演習。",
+    "B": "数年おき、またはA論点周辺で出る。60点超えの上積み。",
+    "C": "低頻度・細かい・時事性が強い。時間がなければ後回し。",
+    "note": "公式公開過去問PDFと正解・配点資料を参照した実戦分類。厳密な機械集計ではない。"
+  },
+  "sources": [
+    {
+      "name": "日本中小企業診断士協会連合会：中小企業診断士試験問題（第1次試験問題PDF）",
+      "url": "https://www.jf-cmca.jp/contents/010_c_/shikenmondai.html",
+      "use": "年度別・科目別の一次試験問題PDFの参照元"
+    },
+    {
+      "name": "日本中小企業診断士協会連合会：令和7年度 第1次試験の正解と配点",
+      "url": "https://www.jf-cmca.jp/contents/010_c_/010_c_r07_shiken/R07_1ji_shiken_kaitou.html",
+      "use": "正解・配点と科目構成の確認元"
+    }
+  ],
+  "priority": [
+    {
+      "rank": 1,
+      "subject": "財務・会計",
+      "reason": "低得点リスクが高い。計算を毎日回す。"
+    },
+    {
+      "rank": 2,
+      "subject": "企業経営理論",
+      "reason": "既に学習開始済みなら得点源化しやすく、二次にも直結。"
+    },
+    {
+      "rank": 3,
+      "subject": "運営管理",
+      "reason": "暗記＋計算で安定しやすく、二次にも直結。"
+    },
+    {
+      "rank": 4,
+      "subject": "経営情報システム",
+      "reason": "A論点暗記で短期に伸ばしやすい。"
+    },
+    {
+      "rank": 5,
+      "subject": "中小企業経営・政策",
+      "reason": "直前暗記の伸びが大きいが年度更新に注意。"
+    },
+    {
+      "rank": 6,
+      "subject": "経済学・経済政策",
+      "reason": "グラフ理解が必要。A論点限定で40点割れを防ぐ。"
+    },
+    {
+      "rank": 7,
+      "subject": "経営法務",
+      "reason": "会社法・知財中心。深追いすると効率が悪い。"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "market_core",
+      "name": "1. 経済学・経済政策：Market Core",
+      "strategy": "需要供給・消費者/企業行動・市場構造・45度線・IS-LM・GDP/物価を最優先。グラフ問題を捨てない。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "需要・供給分析",
+          "past_question_pattern": "均衡、余剰、価格規制、税・補助金、貿易政策が反復。",
+          "study_task": "グラフで価格・数量・余剰変化を説明できる。",
+          "codex_tag": "economics_supply_demand"
+        },
+        {
+          "importance": "A",
+          "topic": "消費者行動",
+          "past_question_pattern": "無差別曲線、予算制約、所得効果・代替効果は頻出。",
+          "study_task": "上級財/下級財/ギッフェン財、最適消費点を図で処理。",
+          "codex_tag": "consumer_choice"
+        },
+        {
+          "importance": "A",
+          "topic": "企業行動・費用曲線",
+          "past_question_pattern": "MC/AC/AVC、操業停止点、損益分岐が定番。",
+          "study_task": "費用曲線と利潤最大化条件を反射で判定。",
+          "codex_tag": "firm_cost_curve"
+        },
+        {
+          "importance": "A",
+          "topic": "市場構造",
+          "past_question_pattern": "完全競争、独占、寡占、価格差別、ゲーム理論が繰り返し出題。",
+          "study_task": "限界収入・限界費用、ナッシュ均衡を型で解く。",
+          "codex_tag": "market_structure"
+        },
+        {
+          "importance": "A",
+          "topic": "市場の失敗",
+          "past_question_pattern": "外部性、公共財、情報の非対称性は安定出題。",
+          "study_task": "ピグー税、逆選択、モラルハザードを識別。",
+          "codex_tag": "market_failure"
+        },
+        {
+          "importance": "A",
+          "topic": "GDP・三面等価",
+          "past_question_pattern": "名目/実質GDP、GDPデフレーター、三面等価は基礎頻出。",
+          "study_task": "計算問題と用語問題を取り切る。",
+          "codex_tag": "gdp_national_accounts"
+        },
+        {
+          "importance": "A",
+          "topic": "物価指数",
+          "past_question_pattern": "ラスパイレス、パーシェ、CPI、デフレーターが頻出。",
+          "study_task": "基準年・比較年の数量と価格の使い分けを暗記。",
+          "codex_tag": "price_index"
+        },
+        {
+          "importance": "A",
+          "topic": "45度線分析",
+          "past_question_pattern": "有効需要、乗数、財政政策、デフレ/インフレギャップが頻出。",
+          "study_task": "乗数計算とグラフ移動を処理。",
+          "codex_tag": "keynesian_cross"
+        },
+        {
+          "importance": "A",
+          "topic": "IS-LM分析",
+          "past_question_pattern": "金融・財政政策、クラウディングアウト、流動性の罠が頻出。",
+          "study_task": "政策でIS/LMのどちらが動くか即答。",
+          "codex_tag": "is_lm"
+        },
+        {
+          "importance": "A",
+          "topic": "AD-AS分析",
+          "past_question_pattern": "需要ショック・供給ショック、物価と産出量の変化が頻出。",
+          "study_task": "短期/長期ASの違いを整理。",
+          "codex_tag": "ad_as"
+        },
+        {
+          "importance": "A",
+          "topic": "貨幣・金融政策",
+          "past_question_pattern": "マネーストック、信用創造、利子率、金融政策の波及。",
+          "study_task": "公開市場操作、信用乗数、貨幣需要を確認。",
+          "codex_tag": "money_banking"
+        },
+        {
+          "importance": "B",
+          "topic": "国際収支・為替",
+          "past_question_pattern": "経常収支、金融収支、購買力平価、金利平価が数年おき。",
+          "study_task": "円高/円安が輸出入・物価へ与える影響を整理。",
+          "codex_tag": "international_finance"
+        },
+        {
+          "importance": "B",
+          "topic": "労働市場",
+          "past_question_pattern": "失業率、自然失業率、フィリップス曲線が出題される。",
+          "study_task": "労働供給・需要、賃金硬直性を図で確認。",
+          "codex_tag": "labor_market"
+        },
+        {
+          "importance": "B",
+          "topic": "経済成長理論",
+          "past_question_pattern": "ソロー成長、資本蓄積、技術進歩、生産性。",
+          "study_task": "深追いせず基本式と直感を押さえる。",
+          "codex_tag": "growth_theory"
+        },
+        {
+          "importance": "B",
+          "topic": "ゲーム理論",
+          "past_question_pattern": "囚人のジレンマ、支配戦略、ナッシュ均衡。",
+          "study_task": "利得表から最適反応を追う。",
+          "codex_tag": "game_theory"
+        },
+        {
+          "importance": "B",
+          "topic": "景気循環・景気指標",
+          "past_question_pattern": "景気循環名、景気動向指数、統計読み取り。",
+          "study_task": "名称暗記とグラフ読み取りを直前確認。",
+          "codex_tag": "business_cycle"
+        },
+        {
+          "importance": "C",
+          "topic": "産業連関表",
+          "past_question_pattern": "投入係数・逆行列係数などは低頻度。",
+          "study_task": "余力があれば例題1〜2問で型だけ確認。",
+          "codex_tag": "input_output"
+        },
+        {
+          "importance": "C",
+          "topic": "高度マクロ",
+          "past_question_pattern": "マンデル=フレミング、期待形成、長期理論の細部。",
+          "study_task": "深入りせず頻出基本論点の後に回す。",
+          "codex_tag": "advanced_macro"
+        },
+        {
+          "importance": "C",
+          "topic": "細かい統計・白書系",
+          "past_question_pattern": "税収、雇用、投資など年次統計の細部。",
+          "study_task": "直前に最新統計の大枠だけ確認。",
+          "codex_tag": "econ_statistics"
+        }
+      ]
+    },
+    {
+      "id": "finance_core",
+      "name": "2. 財務・会計：Finance Core",
+      "strategy": "CVP・経営分析・原価計算・NPV/WACC・会計処理を毎日回す。計算科目なので反射速度が合否に直結。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "財務諸表の構造",
+          "past_question_pattern": "B/S・P/L・C/F・株主資本等変動計算書の基礎が反復。",
+          "study_task": "勘定科目の分類と利益概念を即答。",
+          "codex_tag": "financial_statements"
+        },
+        {
+          "importance": "A",
+          "topic": "仕訳・決算整理",
+          "past_question_pattern": "売上原価、減価償却、貸倒引当金、棚卸資産、経過勘定。",
+          "study_task": "基本仕訳と決算整理を短時間で処理。",
+          "codex_tag": "journal_entries"
+        },
+        {
+          "importance": "A",
+          "topic": "経営分析",
+          "past_question_pattern": "収益性、安全性、効率性、生産性、成長性が頻出。",
+          "study_task": "公式暗記ではなく分母分子の意味で判定。",
+          "codex_tag": "ratio_analysis"
+        },
+        {
+          "importance": "A",
+          "topic": "CVP分析",
+          "past_question_pattern": "損益分岐点、限界利益率、安全余裕率、目標利益が定番。",
+          "study_task": "公式を変形して売上高・販売数量・利益を計算。",
+          "codex_tag": "cvp"
+        },
+        {
+          "importance": "A",
+          "topic": "原価計算",
+          "past_question_pattern": "個別/総合/標準原価計算、差異分析が頻出。",
+          "study_task": "材料・労務・製造間接費差異を型で処理。",
+          "codex_tag": "cost_accounting"
+        },
+        {
+          "importance": "A",
+          "topic": "意思決定会計",
+          "past_question_pattern": "差額原価、埋没原価、機会原価、自製/外注、追加受注。",
+          "study_task": "関連原価だけ抽出する訓練。",
+          "codex_tag": "managerial_decision"
+        },
+        {
+          "importance": "A",
+          "topic": "投資意思決定",
+          "past_question_pattern": "NPV、IRR、回収期間、DCF、現在価値係数。",
+          "study_task": "キャッシュフローと割引率の扱いを固定化。",
+          "codex_tag": "capital_budgeting"
+        },
+        {
+          "importance": "A",
+          "topic": "資本コスト",
+          "past_question_pattern": "WACC、CAPM、負債コスト、株主資本コスト。",
+          "study_task": "税効果後負債コストと資本構成を計算。",
+          "codex_tag": "wacc_capm"
+        },
+        {
+          "importance": "A",
+          "topic": "企業価値評価",
+          "past_question_pattern": "FCF、配当割引モデル、株価指標。",
+          "study_task": "DCFと株式価値/企業価値の違いを整理。",
+          "codex_tag": "valuation"
+        },
+        {
+          "importance": "B",
+          "topic": "キャッシュフロー計算書",
+          "past_question_pattern": "営業CF、投資CF、財務CF、直接法/間接法。",
+          "study_task": "損益とキャッシュのズレを処理。",
+          "codex_tag": "cash_flow_statement"
+        },
+        {
+          "importance": "B",
+          "topic": "税効果会計",
+          "past_question_pattern": "一時差異、繰延税金資産/負債。",
+          "study_task": "将来減算/加算一時差異を比較表で暗記。",
+          "codex_tag": "tax_effect_accounting"
+        },
+        {
+          "importance": "B",
+          "topic": "リース会計",
+          "past_question_pattern": "ファイナンス・リース、オペレーティング・リース。",
+          "study_task": "所有権移転外の会計処理まで確認。",
+          "codex_tag": "lease_accounting"
+        },
+        {
+          "importance": "B",
+          "topic": "ポートフォリオ理論",
+          "past_question_pattern": "期待収益率、標準偏差、相関、分散投資。",
+          "study_task": "相関係数とリスク低減効果を理解。",
+          "codex_tag": "portfolio_theory"
+        },
+        {
+          "importance": "B",
+          "topic": "MM理論・配当政策",
+          "past_question_pattern": "資本構成、法人税あり/なし、配当性向、自社株買い。",
+          "study_task": "理論問題中心で深追いしない。",
+          "codex_tag": "mm_dividend"
+        },
+        {
+          "importance": "B",
+          "topic": "金融商品・債券",
+          "past_question_pattern": "先物、オプション、スワップ、デュレーション。",
+          "study_task": "用語と基本計算だけ押さえる。",
+          "codex_tag": "financial_instruments"
+        },
+        {
+          "importance": "C",
+          "topic": "連結会計",
+          "past_question_pattern": "のれん、非支配株主持分、内部取引消去。",
+          "study_task": "出たら拾う程度。基本仕訳を優先。",
+          "codex_tag": "consolidation"
+        },
+        {
+          "importance": "C",
+          "topic": "外貨換算会計",
+          "past_question_pattern": "為替差損益、換算差額。",
+          "study_task": "低頻度。基本語句だけ。",
+          "codex_tag": "foreign_currency_accounting"
+        },
+        {
+          "importance": "C",
+          "topic": "会社法会計の細部",
+          "past_question_pattern": "剰余金配当規制、準備金積立等。",
+          "study_task": "法務と重なる範囲を最低限。",
+          "codex_tag": "corporate_law_accounting"
+        }
+      ]
+    },
+    {
+      "id": "strategy_core",
+      "name": "3. 企業経営理論：Strategy Core",
+      "strategy": "戦略・組織・人的資源管理・マーケティングの4領域。二次にも直結するため、A論点は語句暗記ではなく説明可能にする。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "経営戦略の階層",
+          "past_question_pattern": "全社戦略、事業戦略、機能別戦略が基礎反復。",
+          "study_task": "階層の違いと具体例を説明。",
+          "codex_tag": "strategy_levels"
+        },
+        {
+          "importance": "A",
+          "topic": "成長戦略",
+          "past_question_pattern": "アンゾフ、PPM、多角化、シナジーが頻出。",
+          "study_task": "市場浸透/開発/製品開発/多角化を即答。",
+          "codex_tag": "growth_strategy"
+        },
+        {
+          "importance": "A",
+          "topic": "競争戦略",
+          "past_question_pattern": "5フォース、3つの基本戦略、バリューチェーン、活動システム。",
+          "study_task": "差別化・集中・コストリーダーシップの混同防止。",
+          "codex_tag": "competitive_strategy"
+        },
+        {
+          "importance": "A",
+          "topic": "経営資源論",
+          "past_question_pattern": "RBV、VRIO、コアコンピタンス、ダイナミック・ケイパビリティ。",
+          "study_task": "模倣困難性と持続的競争優位を説明。",
+          "codex_tag": "resource_based_view"
+        },
+        {
+          "importance": "A",
+          "topic": "垂直統合・取引コスト",
+          "past_question_pattern": "内部化、機会主義、資産特殊性が反復。",
+          "study_task": "統合する理由/しない理由をセットで理解。",
+          "codex_tag": "vertical_integration"
+        },
+        {
+          "importance": "A",
+          "topic": "組織構造",
+          "past_question_pattern": "機能別、事業部制、マトリックス、プロジェクト組織。",
+          "study_task": "メリット/デメリット比較で選択肢を切る。",
+          "codex_tag": "organization_structure"
+        },
+        {
+          "importance": "A",
+          "topic": "組織設計原理",
+          "past_question_pattern": "分業と調整、標準化、公式化、権限委譲、機械的/有機的組織。",
+          "study_task": "環境不確実性との対応を整理。",
+          "codex_tag": "organization_design"
+        },
+        {
+          "importance": "A",
+          "topic": "モチベーション理論",
+          "past_question_pattern": "マズロー、ハーズバーグ、期待理論、公平理論、目標設定理論。",
+          "study_task": "理論名と主張を1行で対応。",
+          "codex_tag": "motivation"
+        },
+        {
+          "importance": "A",
+          "topic": "リーダーシップ",
+          "past_question_pattern": "行動論、条件適合理論、SL理論、変革型、LMX。",
+          "study_task": "状況要因とリーダー行動を識別。",
+          "codex_tag": "leadership"
+        },
+        {
+          "importance": "A",
+          "topic": "マーケティング基礎",
+          "past_question_pattern": "STP、4P、PLC、価格、チャネル、広告、ブランド。",
+          "study_task": "フレームワークの順序と役割を固定。",
+          "codex_tag": "marketing_basics"
+        },
+        {
+          "importance": "A",
+          "topic": "消費者行動",
+          "past_question_pattern": "関与、購買意思決定、準拠集団、知覚、態度。",
+          "study_task": "高関与/低関与、準拠集団の影響を説明。",
+          "codex_tag": "consumer_behavior"
+        },
+        {
+          "importance": "B",
+          "topic": "M&A・提携",
+          "past_question_pattern": "水平/垂直M&A、JV、CVC、アライアンス。",
+          "study_task": "目的とリスクを比較。",
+          "codex_tag": "ma_alliance"
+        },
+        {
+          "importance": "B",
+          "topic": "イノベーション",
+          "past_question_pattern": "破壊的イノベーション、オープンイノベーション、技術経営。",
+          "study_task": "技術プッシュ/需要プル、Sカーブを確認。",
+          "codex_tag": "innovation"
+        },
+        {
+          "importance": "B",
+          "topic": "組織文化・組織変革",
+          "past_question_pattern": "組織社会化、組織学習、抵抗、チェンジマネジメント。",
+          "study_task": "変革プロセスと抵抗要因を理解。",
+          "codex_tag": "organization_change"
+        },
+        {
+          "importance": "B",
+          "topic": "人的資源管理",
+          "past_question_pattern": "採用、配置、評価、報酬、能力開発、雇用管理。",
+          "study_task": "評価制度と報酬制度の対応を整理。",
+          "codex_tag": "hrm"
+        },
+        {
+          "importance": "B",
+          "topic": "労働法規",
+          "past_question_pattern": "労基法、労契法、派遣、有期雇用、同一労働同一賃金。",
+          "study_task": "細かい年数より主要ルールを優先。",
+          "codex_tag": "labor_law"
+        },
+        {
+          "importance": "B",
+          "topic": "マーケティングリサーチ",
+          "past_question_pattern": "標本抽出、尺度、調査設計、相関。",
+          "study_task": "尺度水準と調査法の違いを暗記。",
+          "codex_tag": "marketing_research"
+        },
+        {
+          "importance": "B",
+          "topic": "デジタルマーケティング",
+          "past_question_pattern": "SNS広告、Cookie、リターゲティング、ネイティブ広告。",
+          "study_task": "用語と仕組みを確認。",
+          "codex_tag": "digital_marketing"
+        },
+        {
+          "importance": "C",
+          "topic": "学説名・研究者名の細部",
+          "past_question_pattern": "細かい学説対応は低頻度で難問化しやすい。",
+          "study_task": "A/Bの周辺知識として拾う。",
+          "codex_tag": "strategy_scholars"
+        },
+        {
+          "importance": "C",
+          "topic": "組織ネットワーク理論",
+          "past_question_pattern": "弱い紐帯、構造的空隙、スモールワールド。",
+          "study_task": "用語の意味だけ確認。",
+          "codex_tag": "network_theory"
+        },
+        {
+          "importance": "C",
+          "topic": "ブランド理論の細部",
+          "past_question_pattern": "ブランド・リレーションシップ等の細かい概念。",
+          "study_task": "深追いしない。",
+          "codex_tag": "brand_advanced"
+        }
+      ]
+    },
+    {
+      "id": "operations_core",
+      "name": "4. 運営管理：Operations Core",
+      "strategy": "製造管理と店舗・販売管理の両輪。PERT、在庫、QC、IE、トヨタ生産方式、店舗指標は優先。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "生産方式",
+          "past_question_pattern": "受注/見込、個別/ロット/連続、セル生産、ライン生産。",
+          "study_task": "方式ごとの特徴と向く製品を整理。",
+          "codex_tag": "production_system"
+        },
+        {
+          "importance": "A",
+          "topic": "生産計画",
+          "past_question_pattern": "大日程・中日程・小日程、負荷計画、基準日程。",
+          "study_task": "計画階層と用語の対応を暗記。",
+          "codex_tag": "production_planning"
+        },
+        {
+          "importance": "A",
+          "topic": "工程管理",
+          "past_question_pattern": "ガントチャート、PERT/CPM、ジョンソン法、スケジューリング。",
+          "study_task": "クリティカルパスと余裕時間計算を反復。",
+          "codex_tag": "process_control"
+        },
+        {
+          "importance": "A",
+          "topic": "在庫管理",
+          "past_question_pattern": "定量発注、定期発注、安全在庫、発注点、EOQ。",
+          "study_task": "公式計算と条件比較を取る。",
+          "codex_tag": "inventory_management"
+        },
+        {
+          "importance": "A",
+          "topic": "トヨタ生産方式",
+          "past_question_pattern": "JIT、かんばん、平準化、自働化、多能工、段取り短縮。",
+          "study_task": "用語と狙いをセット暗記。",
+          "codex_tag": "toyota_production_system"
+        },
+        {
+          "importance": "A",
+          "topic": "品質管理",
+          "past_question_pattern": "QC七つ道具、新QC七つ道具、管理図、工程能力指数。",
+          "study_task": "道具の用途と計算問題を処理。",
+          "codex_tag": "quality_control"
+        },
+        {
+          "importance": "A",
+          "topic": "IE",
+          "past_question_pattern": "工程分析、動作研究、時間研究、稼働分析、レイアウト。",
+          "study_task": "記号・図表・分析目的を確認。",
+          "codex_tag": "industrial_engineering"
+        },
+        {
+          "importance": "A",
+          "topic": "設備管理",
+          "past_question_pattern": "TPM、保全、故障率、設備総合効率、時間稼働率。",
+          "study_task": "設備総合効率の分解を暗記。",
+          "codex_tag": "equipment_management"
+        },
+        {
+          "importance": "A",
+          "topic": "店舗施設管理",
+          "past_question_pattern": "店舗レイアウト、動線、棚割、照明、陳列。",
+          "study_task": "売場づくりの用語と効果を整理。",
+          "codex_tag": "store_layout"
+        },
+        {
+          "importance": "A",
+          "topic": "物流・流通",
+          "past_question_pattern": "物流センター、共同配送、3PL、クロスドッキング。",
+          "study_task": "物流用語と目的を整理。",
+          "codex_tag": "logistics"
+        },
+        {
+          "importance": "A",
+          "topic": "商品管理・小売指標",
+          "past_question_pattern": "SKU、POS、ABC分析、GMROI、交差比率。",
+          "study_task": "GMROI/交差比率計算を反復。",
+          "codex_tag": "retail_metrics"
+        },
+        {
+          "importance": "B",
+          "topic": "製品開発",
+          "past_question_pattern": "VE、VA、コンカレントエンジニアリング、CAD/CAM/CAE。",
+          "study_task": "機能/コストの考え方を押さえる。",
+          "codex_tag": "product_development"
+        },
+        {
+          "importance": "B",
+          "topic": "資材・購買管理",
+          "past_question_pattern": "MRP、BOM、外注管理、サプライヤー管理。",
+          "study_task": "BOMとMRPの流れを理解。",
+          "codex_tag": "procurement_mrp"
+        },
+        {
+          "importance": "B",
+          "topic": "生産情報システム",
+          "past_question_pattern": "ERP、MES、APS、PLC、SCM。",
+          "study_task": "システムの階層と役割を区別。",
+          "codex_tag": "production_it"
+        },
+        {
+          "importance": "B",
+          "topic": "需要予測",
+          "past_question_pattern": "移動平均、指数平滑、季節変動。",
+          "study_task": "基本計算だけ反復。",
+          "codex_tag": "demand_forecast"
+        },
+        {
+          "importance": "B",
+          "topic": "小売業態",
+          "past_question_pattern": "GMS、SM、CVS、カテゴリーキラー、EC。",
+          "study_task": "業態の特徴を比較。",
+          "codex_tag": "retail_formats"
+        },
+        {
+          "importance": "B",
+          "topic": "まちづくり三法",
+          "past_question_pattern": "大店立地法、中心市街地活性化法、都市計画法。",
+          "study_task": "制度目的と対象を整理。",
+          "codex_tag": "urban_retail_law"
+        },
+        {
+          "importance": "B",
+          "topic": "販売促進",
+          "past_question_pattern": "インストアプロモーション、FSP、ID-POS。",
+          "study_task": "用語暗記中心。",
+          "codex_tag": "sales_promotion"
+        },
+        {
+          "importance": "C",
+          "topic": "工場立地・レイアウト細部",
+          "past_question_pattern": "SLP、運搬活性示数など。",
+          "study_task": "余力で用語確認。",
+          "codex_tag": "plant_layout_advanced"
+        },
+        {
+          "importance": "C",
+          "topic": "包装・物流規格",
+          "past_question_pattern": "ユニットロード、パレット規格など。",
+          "study_task": "低頻度。直前暗記。",
+          "codex_tag": "packaging_standards"
+        },
+        {
+          "importance": "C",
+          "topic": "商圏分析の細部",
+          "past_question_pattern": "ライリー法則、ハフモデルなど。",
+          "study_task": "公式問題を1回解く程度。",
+          "codex_tag": "trade_area"
+        }
+      ]
+    },
+    {
+      "id": "legal_core",
+      "name": "5. 経営法務：Legal Core",
+      "strategy": "会社法と知財で土台を作る。細かい期間・罰則を追いすぎず、制度比較で40点割れを防ぐ。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "会社法：機関設計",
+          "past_question_pattern": "株主総会、取締役、取締役会、監査役、委員会設置会社。",
+          "study_task": "公開/非公開、大会社、機関設計を表で整理。",
+          "codex_tag": "corporate_organs"
+        },
+        {
+          "importance": "A",
+          "topic": "会社法：株式",
+          "past_question_pattern": "譲渡制限株式、種類株式、自己株式、新株発行。",
+          "study_task": "決議要件と株主保護を整理。",
+          "codex_tag": "shares"
+        },
+        {
+          "importance": "A",
+          "topic": "会社法：設立・組織再編",
+          "past_question_pattern": "設立、事業譲渡、合併、会社分割、株式交換/移転。",
+          "study_task": "手続と債権者保護/株主保護を比較。",
+          "codex_tag": "reorganization"
+        },
+        {
+          "importance": "A",
+          "topic": "会社法：決議要件",
+          "past_question_pattern": "普通決議、特別決議、特殊決議、招集通知。",
+          "study_task": "定足数・決議要件は暗記。",
+          "codex_tag": "resolutions"
+        },
+        {
+          "importance": "A",
+          "topic": "知的財産権",
+          "past_question_pattern": "特許、実用新案、意匠、商標、著作権。",
+          "study_task": "保護対象・存続期間・登録要否を比較。",
+          "codex_tag": "intellectual_property"
+        },
+        {
+          "importance": "A",
+          "topic": "不正競争防止法",
+          "past_question_pattern": "営業秘密、周知表示、著名表示、商品形態模倣。",
+          "study_task": "知財との違いと要件を整理。",
+          "codex_tag": "unfair_competition"
+        },
+        {
+          "importance": "A",
+          "topic": "契約法",
+          "past_question_pattern": "売買、請負、委任、賃貸借、保証、債務不履行。",
+          "study_task": "典型契約の違いと責任を確認。",
+          "codex_tag": "contracts"
+        },
+        {
+          "importance": "A",
+          "topic": "民法基礎",
+          "past_question_pattern": "意思表示、代理、時効、物権、債権譲渡。",
+          "study_task": "事例問題で権利関係を処理。",
+          "codex_tag": "civil_law_basics"
+        },
+        {
+          "importance": "B",
+          "topic": "倒産・再建",
+          "past_question_pattern": "破産、民事再生、会社更生、特別清算。",
+          "study_task": "対象者・目的・手続主体を比較。",
+          "codex_tag": "insolvency"
+        },
+        {
+          "importance": "B",
+          "topic": "独占禁止法・下請法",
+          "past_question_pattern": "私的独占、不当な取引制限、不公正な取引方法、下請法。",
+          "study_task": "カルテル/談合/優越的地位を識別。",
+          "codex_tag": "antitrust"
+        },
+        {
+          "importance": "B",
+          "topic": "消費者保護",
+          "past_question_pattern": "消費者契約法、特商法、景表法、製造物責任法。",
+          "study_task": "取消・無効・表示規制を整理。",
+          "codex_tag": "consumer_law"
+        },
+        {
+          "importance": "B",
+          "topic": "国際取引",
+          "past_question_pattern": "インコタームズ、ウィーン売買条約、英文契約。",
+          "study_task": "貿易条件のリスク移転を確認。",
+          "codex_tag": "international_contracts"
+        },
+        {
+          "importance": "B",
+          "topic": "金融商品取引法",
+          "past_question_pattern": "インサイダー、開示、TOB。",
+          "study_task": "基本用語だけ押さえる。",
+          "codex_tag": "financial_instruments_law"
+        },
+        {
+          "importance": "B",
+          "topic": "個人情報保護法",
+          "past_question_pattern": "個人情報、個人データ、第三者提供、仮名/匿名加工。",
+          "study_task": "用語の階層と第三者提供を整理。",
+          "codex_tag": "personal_information_law"
+        },
+        {
+          "importance": "C",
+          "topic": "登記手続の細部",
+          "past_question_pattern": "本店移転、役員変更、公告方法など。",
+          "study_task": "深入りしない。",
+          "codex_tag": "registration_details"
+        },
+        {
+          "importance": "C",
+          "topic": "手形・小切手",
+          "past_question_pattern": "裏書、遡求、支払呈示。",
+          "study_task": "低頻度。基本用語だけ。",
+          "codex_tag": "bills_checks"
+        },
+        {
+          "importance": "C",
+          "topic": "知財の細かい期間",
+          "past_question_pattern": "審査請求期間、更新、細かな例外。",
+          "study_task": "直前暗記に回す。",
+          "codex_tag": "ip_periods"
+        },
+        {
+          "importance": "C",
+          "topic": "国際法務の細部",
+          "past_question_pattern": "準拠法、仲裁条項、信用状。",
+          "study_task": "余力があれば。",
+          "codex_tag": "international_law_advanced"
+        }
+      ]
+    },
+    {
+      "id": "systems_core",
+      "name": "6. 経営情報システム：Systems Core",
+      "strategy": "DB/SQL・ネットワーク・セキュリティ・開発手法・クラウドを軸に短期得点化。時事ITは最後に薄く広く。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "ハードウェア",
+          "past_question_pattern": "CPU、メモリ、記憶装置、入出力装置、USB等。",
+          "study_task": "基本構成と性能指標を確認。",
+          "codex_tag": "hardware"
+        },
+        {
+          "importance": "A",
+          "topic": "ソフトウェア",
+          "past_question_pattern": "OS、ミドルウェア、アプリ、仮想化、コンテナ。",
+          "study_task": "階層と役割を区別。",
+          "codex_tag": "software"
+        },
+        {
+          "importance": "A",
+          "topic": "ネットワーク",
+          "past_question_pattern": "LAN/WAN、TCP/IP、DNS、HTTP、VPN、Wi-Fi。",
+          "study_task": "プロトコルと役割を整理。",
+          "codex_tag": "network"
+        },
+        {
+          "importance": "A",
+          "topic": "データベース",
+          "past_question_pattern": "正規化、主キー/外部キー、ER図、トランザクション。",
+          "study_task": "第1〜第3正規形とACIDを押さえる。",
+          "codex_tag": "database"
+        },
+        {
+          "importance": "A",
+          "topic": "SQL",
+          "past_question_pattern": "SELECT、JOIN、GROUP BY、ORDER BY、集計。",
+          "study_task": "実際に読み解けるよう短問演習。",
+          "codex_tag": "sql"
+        },
+        {
+          "importance": "A",
+          "topic": "システム開発",
+          "past_question_pattern": "ウォーターフォール、アジャイル、スクラム、DevOps、XP。",
+          "study_task": "開発手法の違いを比較。",
+          "codex_tag": "system_development"
+        },
+        {
+          "importance": "A",
+          "topic": "情報セキュリティ",
+          "past_question_pattern": "暗号、認証、マルウェア、ランサムウェア、ゼロトラスト。",
+          "study_task": "攻撃・対策・認証方式をセット暗記。",
+          "codex_tag": "security"
+        },
+        {
+          "importance": "A",
+          "topic": "システム信頼性",
+          "past_question_pattern": "稼働率、直列/並列、MTBF、MTTR、フェイルセーフ。",
+          "study_task": "稼働率計算を反復。",
+          "codex_tag": "reliability"
+        },
+        {
+          "importance": "A",
+          "topic": "経営情報管理",
+          "past_question_pattern": "ERP、CRM、SFA、SCM、BI、DWH。",
+          "study_task": "何を管理/分析するシステムか判定。",
+          "codex_tag": "management_information_systems"
+        },
+        {
+          "importance": "B",
+          "topic": "クラウド",
+          "past_question_pattern": "SaaS、PaaS、IaaS、仮想化、エッジ、サーバレス。",
+          "study_task": "利用者/事業者の管理範囲を整理。",
+          "codex_tag": "cloud"
+        },
+        {
+          "importance": "B",
+          "topic": "IoT・通信",
+          "past_question_pattern": "センサー、LPWA、5G、Bluetooth、RFID。",
+          "study_task": "通信特性と用途を比較。",
+          "codex_tag": "iot_networks"
+        },
+        {
+          "importance": "B",
+          "topic": "AI・データ活用",
+          "past_question_pattern": "機械学習、生成AI、データマイニング、ETL。",
+          "study_task": "用語の意味と典型用途を確認。",
+          "codex_tag": "ai_data"
+        },
+        {
+          "importance": "B",
+          "topic": "ITガバナンス",
+          "past_question_pattern": "システム監査、ITIL、COBIT、SLA。",
+          "study_task": "監査と運用管理の違いを整理。",
+          "codex_tag": "it_governance"
+        },
+        {
+          "importance": "B",
+          "topic": "プロジェクト管理",
+          "past_question_pattern": "WBS、PMBOK、リスク管理、進捗管理。",
+          "study_task": "WBSとスケジュール/コスト管理を確認。",
+          "codex_tag": "project_management"
+        },
+        {
+          "importance": "B",
+          "topic": "Web技術",
+          "past_question_pattern": "HTML、CSS、JavaScript、Cookie、API。",
+          "study_task": "基本用語と仕組みを確認。",
+          "codex_tag": "web_technology"
+        },
+        {
+          "importance": "C",
+          "topic": "プログラミング細部",
+          "past_question_pattern": "アルゴリズム、擬似言語、データ構造。",
+          "study_task": "低頻度だが得意なら拾う。",
+          "codex_tag": "programming_details"
+        },
+        {
+          "importance": "C",
+          "topic": "法制度系",
+          "past_question_pattern": "電子署名法、不正アクセス禁止法、マイナンバー法。",
+          "study_task": "条文細部より対象行為を確認。",
+          "codex_tag": "it_law"
+        },
+        {
+          "importance": "C",
+          "topic": "最新IT用語",
+          "past_question_pattern": "Web3、量子、メタバース等。",
+          "study_task": "直前に用語リストを流す。",
+          "codex_tag": "emerging_it"
+        },
+        {
+          "importance": "C",
+          "topic": "詳細プロトコル",
+          "past_question_pattern": "SMTP、POP、IMAP、ポート番号など。",
+          "study_task": "暗記コスパは低め。",
+          "codex_tag": "protocol_details"
+        }
+      ]
+    },
+    {
+      "id": "sme_core",
+      "name": "7. 中小企業経営・中小企業政策：SME Core",
+      "strategy": "白書の大きな傾向と政策制度表で短期得点化。政策は年度更新リスクがあるため最新版で直前確認。",
+      "topics": [
+        {
+          "importance": "A",
+          "topic": "中小企業白書",
+          "past_question_pattern": "企業数、従業者数、付加価値、労働生産性、開廃業。",
+          "study_task": "大きな傾向・順位・増減を確認。",
+          "codex_tag": "sme_white_paper"
+        },
+        {
+          "importance": "A",
+          "topic": "小規模企業白書",
+          "past_question_pattern": "小規模事業者数、課題、経営者年齢、地域、事業承継。",
+          "study_task": "中小企業白書との差を整理。",
+          "codex_tag": "small_business_white_paper"
+        },
+        {
+          "importance": "A",
+          "topic": "中小企業基本法",
+          "past_question_pattern": "中小企業者の範囲、小規模企業者、基本理念。",
+          "study_task": "業種別の資本金/従業員基準を暗記。",
+          "codex_tag": "sme_basic_act"
+        },
+        {
+          "importance": "A",
+          "topic": "中小企業等経営強化法",
+          "past_question_pattern": "経営力向上計画、経営革新計画、先端設備等導入。",
+          "study_task": "制度目的・認定主体・支援内容を表で整理。",
+          "codex_tag": "business_enhancement_act"
+        },
+        {
+          "importance": "A",
+          "topic": "補助金",
+          "past_question_pattern": "ものづくり補助金、持続化補助金、IT導入補助金等。",
+          "study_task": "対象・補助率・目的を最新年度で確認。",
+          "codex_tag": "subsidies"
+        },
+        {
+          "importance": "A",
+          "topic": "金融支援",
+          "past_question_pattern": "日本政策金融公庫、信用保証制度、セーフティネット保証。",
+          "study_task": "保証協会/公庫/自治体制度の違いを整理。",
+          "codex_tag": "sme_finance"
+        },
+        {
+          "importance": "A",
+          "topic": "共済制度",
+          "past_question_pattern": "経営セーフティ共済、小規模企業共済。",
+          "study_task": "掛金、加入対象、貸付/控除の特徴を比較。",
+          "codex_tag": "mutual_aid"
+        },
+        {
+          "importance": "A",
+          "topic": "事業承継",
+          "past_question_pattern": "法人版/個人版事業承継税制、承継計画、後継者問題。",
+          "study_task": "税制と支援制度を比較。",
+          "codex_tag": "business_succession"
+        },
+        {
+          "importance": "A",
+          "topic": "税制",
+          "past_question_pattern": "賃上げ促進税制、交際費、少額減価償却、投資促進税制。",
+          "study_task": "適用対象と優遇内容を整理。",
+          "codex_tag": "sme_tax"
+        },
+        {
+          "importance": "B",
+          "topic": "創業支援",
+          "past_question_pattern": "新規開業資金、創業融資、創業者属性、開業費用。",
+          "study_task": "白書統計と政策をセット確認。",
+          "codex_tag": "startup_support"
+        },
+        {
+          "importance": "B",
+          "topic": "商業・地域支援",
+          "past_question_pattern": "商店街、中心市街地、地域未来投資促進法。",
+          "study_task": "制度目的と支援主体を整理。",
+          "codex_tag": "regional_commerce"
+        },
+        {
+          "importance": "B",
+          "topic": "海外展開支援",
+          "past_question_pattern": "JETRO、中小機構、海外展開補助、輸出支援。",
+          "study_task": "支援機関と支援内容を対応。",
+          "codex_tag": "overseas_expansion"
+        },
+        {
+          "importance": "B",
+          "topic": "人材・賃上げ",
+          "past_question_pattern": "人材確保、リスキリング、最低賃金、女性活躍。",
+          "study_task": "白書傾向と政策を確認。",
+          "codex_tag": "human_resources_sme"
+        },
+        {
+          "importance": "B",
+          "topic": "DX支援",
+          "past_question_pattern": "IT導入、デジタル化、サイバーセキュリティ。",
+          "study_task": "政策名と対象を更新確認。",
+          "codex_tag": "sme_dx"
+        },
+        {
+          "importance": "B",
+          "topic": "省力化・生産性向上",
+          "past_question_pattern": "省力化投資、設備投資、付加価値向上。",
+          "study_task": "直近制度の目的と要件を確認。",
+          "codex_tag": "productivity_support"
+        },
+        {
+          "importance": "C",
+          "topic": "白書の細かい数値",
+          "past_question_pattern": "年度比較・構成比・細かい順位。",
+          "study_task": "大枠を覚えた後に直前暗記。",
+          "codex_tag": "whitepaper_details"
+        },
+        {
+          "importance": "C",
+          "topic": "新制度の初年度論点",
+          "past_question_pattern": "新設補助金・新制度の細かい要件。",
+          "study_task": "最新版資料で直前確認。",
+          "codex_tag": "new_policy_details"
+        },
+        {
+          "importance": "C",
+          "topic": "支援機関の細部",
+          "past_question_pattern": "よろず支援拠点、商工会、商工会議所、中小機構の細かい役割。",
+          "study_task": "混同しやすい部分だけ比較。",
+          "codex_tag": "support_orgs"
+        },
+        {
+          "importance": "C",
+          "topic": "災害・BCP支援",
+          "past_question_pattern": "事業継続力強化計画、災害復旧貸付。",
+          "study_task": "低頻度だが制度名は確認。",
+          "codex_tag": "bcp_support"
+        }
+      ]
+    }
+  ]
+}

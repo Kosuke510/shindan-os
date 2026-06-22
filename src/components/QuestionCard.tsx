@@ -69,7 +69,7 @@ export function QuestionCard({ question, sessionLabel, current, total, secondsLe
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-lg px-2.5 py-1.5 text-[10px] font-black" style={{ background: subject.softAccent, color: subject.accent }}>{subject.code} · {subject.shortName}</span>
           <span className="rounded-lg bg-slate-200/70 px-2.5 py-1.5 text-[10px] font-black text-slate-600">Core {question.coreName}</span>
-          <span className="rounded-lg bg-white px-2.5 py-1.5 text-[10px] font-black text-slate-500 ring-1 ring-slate-200">Rank {question.rank}</span>
+          <span className={`rounded-lg px-2.5 py-1.5 text-[10px] font-black ring-1 ${question.importance === "A" ? "bg-blue-50 text-blue-700 ring-blue-100" : question.importance === "B" ? "bg-amber-50 text-amber-700 ring-amber-100" : "bg-slate-100 text-slate-600 ring-slate-200"}`}>{question.importance ?? question.rank}論点</span>
           <span className="max-w-full break-words rounded-lg bg-blue-50 px-2.5 py-1.5 text-[10px] font-black text-blue-700">出典: {sourceLabel}</span>
           {question.isYearSensitive && <span className="rounded-lg bg-amber-50 px-2.5 py-1.5 text-[10px] font-black text-amber-700">{reviewRiskLabel}</span>}
           {question.isYearSensitive && <span className={`rounded-lg px-2.5 py-1.5 text-[10px] font-black ${reviewUnconfirmed ? "bg-orange-50 text-orange-700" : reviewDue ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-700"}`}>{reviewUnconfirmed ? "未確認" : reviewDue ? "要レビュー" : `${confirmedYearLabel}確認済み`}</span>}

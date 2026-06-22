@@ -8,6 +8,8 @@ export type SubjectId =
   | "policy";
 
 export type QuestionRank = "A" | "B" | "C";
+export type AbcImportance = "A" | "B" | "C";
+export type QuestionSourceType = "past_exam_pattern" | "original";
 export type QuestionDifficulty = "基礎" | "標準" | "応用";
 export type QuestionType = "一問一答" | "4択" | "計算" | "比較";
 export type QuestionSource = "過去問" | "自作" | "教材" | "手入力";
@@ -45,6 +47,13 @@ export interface Question {
   examPoint: string;
   relatedTopics: string[];
   source: QuestionSource;
+  /** ABC重要論点マップから派生する一次試験上の重要度。 */
+  importance?: AbcImportance;
+  /** ABC重要論点マップの機械可読タグ。 */
+  topicTag?: string;
+  primaryExamTopicTag?: string;
+  sourceType?: QuestionSourceType;
+  examStage?: "primary";
   sourceYear?: string;
   sourceSubject?: string;
   sourceQuestionNumber?: string;
@@ -124,11 +133,29 @@ export interface GradeResult {
   addedToWeakPoints: boolean;
 }
 
-export type StudyMode = "random" | "subject" | "review" | "quick";
+export type StudyMode = "random" | "subject" | "review" | "quick" | "importance";
 
 export interface StudySessionConfig {
   mode: StudyMode;
   subject?: SubjectId;
+  importance?: AbcImportance;
+  topicTag?: string;
+}
+
+export interface AbcTopic {
+  importance: AbcImportance;
+  topic: string;
+  pastQuestionPattern: string;
+  studyTask: string;
+  codexTag: string;
+}
+
+export interface AbcSubjectMap {
+  id: string;
+  subject: SubjectId;
+  name: string;
+  strategy: string;
+  topics: AbcTopic[];
 }
 
 export interface SubjectStat {

@@ -88,7 +88,7 @@ export function Dashboard({ state, persistenceStatus, onStart, onStartQuestion, 
               <div className="absolute -right-12 -top-20 size-64 rounded-full border-[38px] border-white/[0.035]" />
               <div className="relative">
                 <div className="flex flex-wrap items-center justify-between gap-3"><span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-black tracking-[0.14em] text-blue-200"><Sparkles size={12} />今日のアクション</span><span className="rounded-full bg-blue-500/20 px-3 py-1.5 text-[10px] font-black text-blue-100">推定 {estimatedMinutes}分</span></div>
-                <h2 className="mt-4 text-xl font-black tracking-[-0.03em] sm:text-2xl">{dueCount ? `復習タスクが${dueCount}件あります` : "新しいAランク問題へ進めます"}</h2>
+                <h2 className="mt-4 text-xl font-black tracking-[-0.03em] sm:text-2xl">{dueCount ? `復習タスクが${dueCount}件あります` : "新しいA論点問題へ進めます"}</h2>
                 <div className="mt-4 grid grid-cols-2 gap-2 text-center sm:grid-cols-4">
                   <ActionStat label="今日の復習" value={`${dueCount}件`} alert={dueCount > 0} />
                   <ActionStat label="未確認" value={`${contentReviewStats.unconfirmed}件`} alert={contentReviewStats.unconfirmed > 0} />
@@ -97,7 +97,7 @@ export function Dashboard({ state, persistenceStatus, onStart, onStartQuestion, 
                 </div>
                 <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
                   <TodayButton icon={Clock3} label="10分だけやる" primary onClick={() => onStart({ mode: "quick" })} />
-                  <TodayButton icon={ArrowRight} label={dueCount ? "復習タスクから始める" : "Aランク問題を1問始める"} onClick={() => onStart({ mode: "review" })} />
+                  <TodayButton icon={ArrowRight} label={dueCount ? "復習タスクから始める" : "A論点問題を1問始める"} onClick={() => onStart({ mode: "review" })} />
                   <TodayButton icon={Shuffle} label="全科目ランダムで1問" onClick={() => onStart({ mode: "random" })} />
                   <TodayButton icon={ShieldCheck} label="未確認レビューを見る" onClick={() => onOpenContentReviews("unconfirmed")} />
                 </div>

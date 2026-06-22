@@ -6,6 +6,7 @@ import { smeQuestions } from "./sme";
 import { strategyQuestions } from "./strategy";
 import { systemsQuestions } from "./systems";
 import type { Question } from "../../../types";
+import { applyAbcMetadata } from "../../abcTopics";
 import { applyYearSensitivityDefaults } from "../../../utils/contentReview";
 
 const rawPublicQuestions: Question[] = [
@@ -18,4 +19,4 @@ const rawPublicQuestions: Question[] = [
   ...smeQuestions,
 ];
 
-export const publicQuestions: Question[] = rawPublicQuestions.map((question) => applyYearSensitivityDefaults(question));
+export const publicQuestions: Question[] = rawPublicQuestions.map((question) => applyAbcMetadata(applyYearSensitivityDefaults(question)));
