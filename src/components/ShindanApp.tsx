@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FlaskConical, RefreshCw } from "lucide-react";
+import { AIView } from "@/components/AIView";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { Dashboard } from "@/components/Dashboard";
 import { DataView } from "@/components/DataView";
@@ -189,6 +190,7 @@ export function ShindanApp() {
       {activeView === "practice" && <PracticeView state={state} onStart={startSession} />}
       {activeView === "weak" && <WeakView state={state} onStartQuestion={startQuestion} />}
       {activeView === "data" && <DataView state={state} onImportState={(next) => updateLearningState(() => next)} onReset={handleReset} />}
+      {activeView === "ai" && <AIView state={state} />}
       {activeView !== "home" && !session && !contentReviewFilter && !qaOpen && <div className="safe-area-floating-top fixed right-3 z-30 sm:right-6"><ReviewBadge count={dueCount} onClick={() => startSession({ mode: "review" })} /></div>}
       {!session && !contentReviewFilter && !qaOpen && <BottomNavigation active={activeView} practiceBadge={dueCount} reviewBadge={Math.max(reviewStats.unconfirmed, reviewStats.totalDue)} onSelect={handleNavigate} />}
       {qaEnabled && !session && !qaOpen && <button type="button" aria-label="QA Debugモードを開く" onClick={() => setQaOpen(true)} className="fixed bottom-20 right-3 z-50 inline-flex min-h-11 items-center gap-2 rounded-full bg-violet-700 px-4 text-xs font-black text-white shadow-[0_10px_30px_rgba(109,40,217,.3)] hover:bg-violet-800 lg:bottom-5 lg:right-5"><FlaskConical size={15} />QA</button>}
