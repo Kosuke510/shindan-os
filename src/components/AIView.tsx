@@ -68,7 +68,6 @@ export function AIView({ state }: AIViewProps) {
   };
 
   const handleGenerate = async () => {
-    if (!topic.trim()) return;
     setLoading(true);
     setError(null);
     setGeneratedQ(null);
@@ -166,7 +165,7 @@ export function AIView({ state }: AIViewProps) {
             <div className="rounded-2xl bg-white p-5 shadow-sm">
               <h2 className="mb-1 text-sm font-black text-slate-800">AIが問題を生成</h2>
               <p className="mb-4 text-xs leading-5 text-slate-500">
-                科目とテーマを指定すると、本試験レベルの5択問題をAIが作成します。
+                科目を指定すると、本試験レベルの5択問題をAIが作成します。テーマは任意で絞り込めます。
               </p>
 
               <div className="mb-3">
@@ -187,7 +186,7 @@ export function AIView({ state }: AIViewProps) {
               </div>
 
               <div className="mb-4">
-                <label className="mb-1.5 block text-xs font-bold text-slate-600">テーマ</label>
+                <label className="mb-1.5 block text-xs font-bold text-slate-600">テーマ（任意）</label>
                 <input
                   type="text"
                   value={topic}
@@ -200,7 +199,7 @@ export function AIView({ state }: AIViewProps) {
               <button
                 type="button"
                 onClick={handleGenerate}
-                disabled={loading || !topic.trim()}
+                disabled={loading}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3 text-sm font-black text-white disabled:opacity-60"
               >
                 {loading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}

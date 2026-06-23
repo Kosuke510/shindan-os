@@ -36,7 +36,9 @@ ${JSON.stringify(weakTopics, null, 2)}
   "answer": "正解の選択肢（例: ウ: 選択肢3）",
   "explanation": "解説（200字以内）"
 }`;
-    userPrompt = `科目: ${subject}\nテーマ: ${topic}\n\nこの内容で中小企業診断士一次試験レベルの5択問題を1問作成してください。`;
+    userPrompt = topic?.trim()
+      ? `科目: ${subject}\nテーマ: ${topic}\n\nこの内容で中小企業診断士一次試験レベルの5択問題を1問作成してください。`
+      : `科目: ${subject}\n\nこの科目の中小企業診断士一次試験レベルの5択問題を1問作成してください。`;
   } else {
     return NextResponse.json({ error: "不明なリクエストタイプです" }, { status: 400 });
   }
